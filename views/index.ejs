@@ -1,0 +1,41 @@
+<%- include('partials/header') -%>
+
+<body>
+    <h1>Medicine Cabinet</h1>
+    <form action="/new" method="POST">
+        <label for="medicinename"></label>
+        <input type="text" name="name" placeholder="Medicine name" value="<%= input %>"> <!-- need name so that it gets passed to server; field value is referred to in POST req body-->      
+        <br>
+        <label for="sideeffects"></label>
+        <input type="text" name="notes" placeholder="Notes (e.g. side effects)" value="<%= notes %>">
+        <br>
+        <button type="submit">Add Medicine</button>
+    </form>
+    <% if (errorMessages && errorMessages.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+          <% errorMessages.forEach(message => { %>
+            <%= message %><br>
+          <% }) %>
+        </div>
+      <% } %>
+      
+      <% if (successMessages && successMessages.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+          <% successMessages.forEach(message => { %>
+            <%= message %><br>
+          <% }) %>
+        </div>
+      <% } %>
+    <ul>
+        <% medList.forEach(med => { %>
+            <li>
+                <div><%= med.name %></div>
+                <div><%= med.notes %></div>
+                <a href="/edit/<%= med._id %>">Edit</a>
+                <a href="/edit/remove/<%= med._id %>">Remove</a>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+
+<%- include('partials/footer') -%>
