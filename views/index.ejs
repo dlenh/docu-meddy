@@ -36,7 +36,9 @@
             </li>
         <% }) %>
     </ul>
-    <button type="submit">Check Drug Interactions</button>
+    <form action="/interactions" method="POST">
+        <button type="submit">Check Drug Interactions</button>
+    </form>
 </body>
 
 <%- include('partials/footer') -%>
