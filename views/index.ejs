@@ -2,14 +2,15 @@
 
 <body>
     <h1>Medicine Cabinet</h1>
+    
     <form action="/new" method="POST">
-        <label for="medicinename"></label>
-        <input type="text" name="name" placeholder="Medicine name" value="<%= input %>"> <!-- need name so that it gets passed to server; field value is referred to in POST req body-->      
-        <br>
-        <label for="sideeffects"></label>
-        <input type="text" name="notes" placeholder="Notes (e.g. side effects)" value="<%= notes %>">
-        <br>
-        <button type="submit">Add Medicine</button>
+      <label for="medicinename"></label>
+      <input type="text" name="name" placeholder="Medicine name" value="<%= input %>"> <!-- need name so that it gets passed to server; field value is referred to in POST req body-->      
+      <br>
+      <label for="sideeffects"></label>
+      <input type="text" name="notes" placeholder="Notes (e.g. side effects)" value="<%= notes %>">
+      <br>
+      <button type="submit">Add Medicine</button>
     </form>
     <% if (errorMessages && errorMessages.length > 0) { %>
         <div class="alert alert-danger" role="alert">
@@ -36,7 +37,7 @@
             </li>
         <% }) %>
     </ul>
-    <form action="/interactions" method="POST">
+    <form action="/interaction" method="GET">
         <button type="submit">Check Drug Interactions</button>
     </form>
 </body>
