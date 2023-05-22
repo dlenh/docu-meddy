@@ -9,6 +9,7 @@ const logger = require("morgan");
 const MongoStore = require("connect-mongo")(session);
 const homeRoutes = require("./routes/home");
 const editRoutes = require("./routes/edit");
+const interactionRoutes = require("./routes/interaction");
 
 require("dotenv").config({path: "./config/.env"});
 connectDB();
@@ -28,6 +29,7 @@ app.use(
 
 app.use(flash());
 
+app.use("/", interactionRoutes);
 app.use("/edit", editRoutes);
 app.use("/", homeRoutes);
 
