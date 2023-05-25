@@ -1,45 +1,65 @@
 <%- include('partials/header') -%>
 
 <body>
-    <h1>Medicine Cabinet</h1>
+  <section class="container">
+    <section class="row">
+      <section class="column col-4 offset-1">
+      <h1>Add a Medicine</h1>
+
+      <form action="/new" method="POST">
+        <label for="medicinename" class="form-label"></label>
+        <input type="text" class="form-control" name="name" placeholder="Medicine name" value="<%= input %>"> <!-- need name so that it gets passed to server; field value is referred to in POST req body-->      
+        <label for="sideeffects" class="form-label"></label>
+        <input type="text" class="form-control" name="notes" placeholder="Notes (e.g. side effects)" value="<%= notes %>">
+        <br>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Medicine</button>
+      </form>
+      <br>
+      <form action="/interaction" method="GET">
+        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Check Drug Interactions</button>
+      </form>
+      <br>
+      <% if (errorMessages && errorMessages.length > 0) { %>
+          <div class="alert alert-danger" role="alert">
+            <% errorMessages.forEach(message => { %>
+              <%= message %><br>
+            <% }) %>
+          </div>
+        <% } %>
+        
+        <% if (successMessages && successMessages.length > 0) { %>
+          <div class="alert alert-success" role="alert">
+            <% successMessages.forEach(message => { %>
+              <%= message %><br>
+            <% }) %>
+          </div>
+        <% } %>
+      </section>
+      <section class="column col-4 offset-2 border border-primary border-5">
+        <% if (medList.length === 0) { %>
+          <h1>Medicine Cabinet</h1>
+        <% } else { %>
+          <h1>Medicine Cabinet: <%= medList.length %></h1> 
+        <% } %>
+        <ul class="list-group list-group-flush">
+          <% medList.forEach(med => { %>
+              <li class="list-group-item">
+                  <div>Medicine: <%= med.name %></div>
+                  <% if (med.notes) { %>
+                    <div>Notes: <%= med.notes %></div>
+                  <% } %>
+                  <a class="btn btn-secondary btn-sm" href="/edit/<%= med._id %>" role="button"><i class="fa fa-pen"></i> Edit</a>
+                  <a class="btn btn-danger btn-sm" href="/edit/remove/<%= med._id %>" role="button"><i class="fa fa-trash"></i> Remove</a>
+              </li>
+          <% }) %>
+      </ul>
+      </section>
+    </section>
+    <section class="row">
+
+    </section>
+  </section>
     
-    <form action="/new" method="POST">
-      <label for="medicinename"></label>
-      <input type="text" name="name" placeholder="Medicine name" value="<%= input %>"> <!-- need name so that it gets passed to server; field value is referred to in POST req body-->      
-      <br>
-      <label for="sideeffects"></label>
-      <input type="text" name="notes" placeholder="Notes (e.g. side effects)" value="<%= notes %>">
-      <br>
-      <button type="submit">Add Medicine</button>
-    </form>
-    <% if (errorMessages && errorMessages.length > 0) { %>
-        <div class="alert alert-danger" role="alert">
-          <% errorMessages.forEach(message => { %>
-            <%= message %><br>
-          <% }) %>
-        </div>
-      <% } %>
-      
-      <% if (successMessages && successMessages.length > 0) { %>
-        <div class="alert alert-success" role="alert">
-          <% successMessages.forEach(message => { %>
-            <%= message %><br>
-          <% }) %>
-        </div>
-      <% } %>
-    <ul>
-        <% medList.forEach(med => { %>
-            <li>
-                <div><%= med.name %></div>
-                <div><%= med.notes %></div>
-                <a href="/edit/<%= med._id %>">Edit</a>
-                <a href="/edit/remove/<%= med._id %>">Remove</a>
-            </li>
-        <% }) %>
-    </ul>
-    <form action="/interaction" method="GET">
-        <button type="submit">Check Drug Interactions</button>
-    </form>
 </body>
 
 <%- include('partials/footer') -%>
