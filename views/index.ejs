@@ -3,7 +3,7 @@
 <body>
   <section class="container">
     <section class="row">
-      <section class="column col-4 offset-1">
+      <section class="column col-sm-12 col-md-6 col-lg-6">
       <h1>Add a Medicine</h1>
 
       <form action="/new" method="POST">
@@ -35,7 +35,7 @@
           </div>
         <% } %>
       </section>
-      <section class="column col-4 offset-2 border border-primary border-5">
+      <section class="column col-sm-12 col-md-6 col-lg-6 border border-primary border-5">
         <% if (medList.length === 0) { %>
           <h1>Medicine Cabinet</h1>
         <% } else { %>
