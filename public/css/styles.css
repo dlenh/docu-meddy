@@ -1,0 +1,41 @@
+.my-form,
+.my-list {
+    width: 75%;
+}
+/*
+@media (max-width: 992px) {
+    .my-form {
+        width: 75%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .my-form {
+        width: 80%;
+    }
+} */
+
+@media (max-width: 575.98px) {
+    .col-md-9 {
+      margin: 0 auto;
+      float: none;
+    }
+  }
+
+@media (min-width: 768px) {
+      .col-lg-4 {
+        margin-top: 20px;
+      }
+    }
+
+@media (min-width: 992px) {
+      .col-lg-4 {
+        margin-top: 0;
+        margin-left: 20px;
+      }
+    }
+
+.med-cab {
+      background-color: teal;
+      padding: 20px;
+    }
