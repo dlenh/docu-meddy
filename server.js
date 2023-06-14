@@ -4,6 +4,7 @@ const PORT = 9999;
 const mongoose = require("mongoose");
 const connectDB = require("./config/database");
 const flash = require("express-flash");
+const passport = require("passport");
 const session = require("express-session");
 const logger = require("morgan");
 const MongoStore = require("connect-mongo")(session);
