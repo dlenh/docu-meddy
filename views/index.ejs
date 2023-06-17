@@ -1,71 +1,11 @@
 <%- include('partials/header') -%>
 
-<body>
-  <section class="container">
-    <!-- <section class="row">
-      <div>
-        <p><strong>User Name</strong>: </p>
-        <p><strong>Email</strong>: </p>
-        <a href="/" class="col-3 btn btn-primary log-btn">Logout</a>
+<main class="container">
+    <div class="row justify-content-around mt-5">
+        <a href="/login" class="col-3 btn btn-primary med-btn"> Login</a>
+        <a href="/signup" class="col-3 btn btn-primary med-btn"> Signup</a>
     </div>
-    </section> -->
-    <section class="row">
-      <section class="col-sm-12 col-md-9 col-lg-6 col-xl-6">
-      <h1>Add a Medicine</h1>
-      <form action="/new" method="POST" class="my-form">
-        <label for="medicinename" class="form-label"></label>
-        <input type="text" class="form-control" name="name" placeholder="Medicine name" value="<%= input %>"> <!-- need name so that it gets passed to server; field value is referred to in POST req body-->      
-        <label for="sideeffects" class="form-label"></label>
-        <input type="text" class="form-control" name="notes" placeholder="Notes (e.g. side effects)" value="<%= notes %>">
-        <br>
-        <button type="submit" class="btn btn-primary med-btn"><i class="fa fa-plus"></i> Add Medicine</button>
-      </form>
-      <br>
-      <form action="/interaction" method="GET" class="my-form">
-        <button type="submit" class="btn btn-primary med-btn"><i class="fa fa-check"></i> Check Drug Interactions</button>
-      </form>
-      <br>
-      <% if (errorMessages && errorMessages.length > 0) { %>
-          <div class="alert alert-danger" role="alert">
-            <% errorMessages.forEach(message => { %>
-              <%= message %><br>
-            <% }) %>
-          </div>
-        <% } %>
-        
-        <% if (successMessages && successMessages.length > 0) { %>
-          <div class="alert alert-success" role="alert">
-            <% successMessages.forEach(message => { %>
-              <%= message %><br>
-            <% }) %>
-          </div>
-        <% } %>
-      </section>
-      <section class="col-sm-10 col-md-7 col-lg-6 col-xl-5 med-cab">
-        <% if (medList.length === 0) { %>
-          <h1>Medicine Cabinet</h1>
-        <% } else { %>
-          <h1>Medicine Cabinet: <%= medList.length %></h1> 
-        <% } %>
-        <ul class="list-group list-group-flush">
-          <% medList.forEach(med => { %>
-              <li class="list-group-item">
-                  <div>Medicine: <%= med.name %></div>
-                  <% if (med.notes) { %>
-                    <div>Notes: <%= med.notes %></div>
-                  <% } %>
-                  <a class="btn btn-secondary btn-sm" href="/edit/<%= med._id %>" role="button"><i class="fa fa-pen"></i> Edit</a>
-                  <a class="btn btn-danger btn-sm" href="/edit/remove/<%= med._id %>" role="button"><i class="fa fa-trash"></i> Remove</a>
-              </li>
-          <% }) %>
-      </ul>
-      </section>
-    </section>
-    <section class="row">
-
-    </section>
-  </section>
+</main>
     
-</body>
 
 <%- include('partials/footer') -%>
