@@ -10,9 +10,10 @@ const logger = require("morgan");
 const MongoStore = require("connect-mongo")(session);
 const homeRoutes = require("./routes/home");
 const editRoutes = require("./routes/edit");
-const interactionRoutes = require("./routes/interaction");
+// const interactionRoutes = require("./routes/interaction");
 
 require("dotenv").config({path: "./config/.env"});
+require("./config/passport")(passport);
 connectDB();
 
 app.set("view engine", "ejs");
@@ -36,8 +37,9 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use("/", interactionRoutes);
-app.use("/edit", editRoutes);
+// app.use("/", interactionRoutes);
 app.use("/", homeRoutes);
+app.use("/edit", editRoutes);
+
 
 app.listen(PORT, () => console.log("Server is running!"));
