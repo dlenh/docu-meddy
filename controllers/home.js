@@ -1,14 +1,18 @@
-const MedList = require("../models/medlist");
+const MedList = require("../models/Medlist");
 const fetch = require("node-fetch");
 
 module.exports = {
-    getIndex: async (req, res) => {
+    getIndex: (req, res) => {
+      res.render("index.ejs");
+    },
+    getProfile: async (req, res) => {
         try {
-            const meds = await MedList.find();
+            const meds = await MedList.find({ user: req.user.id });
             const input = req.flash("input")[0]; // Get the input value from flash messages
             const notes = req.flash("notes")[0]; // Get the notes value from flash messages
     
-            res.render("index.ejs", {
+            res.render("profile.ejs", {
+              user: req.user,
               medList: meds,
               input: input,
               notes: notes,
@@ -24,17 +28,17 @@ module.exports = {
       const notes = req.body.notes;
   
       try {
-        const existingMed = await MedList.findOne({ name: { $regex: new RegExp(`^${input}$`, 'i') } });
+        const existingMed = await MedList.findOne({ name: { $regex: new RegExp(`^${input}$`, 'i') }, user: req.user._id });
         if (existingMed) {
           req.flash("error", "This medicine is already on your list. You may edit it below.");
           req.flash("input", existingMed.name); // Use the existing medicine name from the database
           req.flash("notes", notes);
-          return res.redirect("/");
+          return res.redirect("/profile");
         } else if (!input) {
           req.flash("error", "Please enter a medicine name.");
           req.flash("input", input);
           req.flash("notes", notes);
-          return res.redirect("/");
+          return res.redirect("/profile");
         }
   
         const response = await fetch(
@@ -49,7 +53,7 @@ module.exports = {
           req.flash("error", "Invalid medicine name. Please ensure correct spelling.");
           req.flash("input", input);
           req.flash("notes", notes);
-          return res.redirect("/");
+          return res.redirect("/profile");
         }
   
         const rxcui = data.idGroup.rxnormId[0];
@@ -57,15 +61,16 @@ module.exports = {
           name: input,
           notes: notes,
           rxcui: rxcui,
+          user: req.user._id,
         });
         await newMed.save();
         console.log(newMed);
         req.flash("success", "Medicine added successfully!");
-        return res.redirect("/");
+        return res.redirect("/profile");
       } catch (err) {
         console.error(err);
         req.flash("error", "An error occurred while adding medicine.");
-        return res.redirect("/");
+        return res.redirect("/profile");
       }
     }
   //   addMed: async (req, res) => {
