@@ -1,4 +1,4 @@
-const MedList = require("../models/medlist");
+const MedList = require("../models/Medlist");
 const fetch = require("node-fetch");
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
 
         try {
             const med = await MedList.findById(id);
-            const meds = await MedList.find();
+            const meds = await MedList.find({ user: req.user._id });
             
             if (!med) {
             req.flash("error", "Medicine not found");
