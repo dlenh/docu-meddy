@@ -33,7 +33,11 @@
       <% if (errorMessages && errorMessages.length > 0) { %>
           <div class="alert alert-danger" role="alert">
             <% errorMessages.forEach(message => { %>
-              <%= message %><br>
+              <% if (message.msg) { %>
+                <%= message.msg %>
+              <% } else { %>
+                <%= message %>
+              <% } %>
             <% }) %>
           </div>
         <% } %>
@@ -41,7 +45,11 @@
         <% if (successMessages && successMessages.length > 0) { %>
           <div class="alert alert-success" role="alert">
             <% successMessages.forEach(message => { %>
-              <%= message %><br>
+              <% if (message.msg) { %>
+                <%= message.msg %>
+              <% } else { %>
+                <%= message %>
+              <% } %>
             <% }) %>
           </div>
         <% } %>
