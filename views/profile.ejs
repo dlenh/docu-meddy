@@ -9,10 +9,12 @@
         <a href="/" class="col-3 btn btn-primary log-btn">Logout</a>
     </div>
     </section> -->
-    <section>
-      <p><strong>User Name</strong>: <%= user.userName %></p>
-      <p><strong>Email</strong>: <%= user.email %></p>
-      <a href="/logout" class="btn btn-primary med-btn" role="button"><i class="fa fa-sign-out-alt"></i> Logout</a>
+    <section class="containter">
+      <div class="user-info">
+        <p><strong>User Name</strong>: <%= user.userName %></p>
+        <p><strong>Email</strong>: <%= user.email %></p>
+        <a href="/logout" class="btn btn-primary med-btn" role="button"><i class="fa fa-sign-out-alt"></i> Logout</a>
+      </div>    
     </section>
     <section class="row">
       <section class="col-sm-12 col-md-9 col-lg-6 col-xl-6">
