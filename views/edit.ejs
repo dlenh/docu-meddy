@@ -1,43 +1,65 @@
 <%- include('partials/header') -%>
 
 <body>
-        <h1>Editing Medicine Entry</h1>
-        <% if (errorMessages && errorMessages.length > 0) { %>
-            <div class="alert alert-danger" role="alert">
-              <% errorMessages.forEach(message => { %>
-                <% if (message.msg) { %>
-                  <%= message.msg %>
-                <% } else { %>
-                  <%= message %>
-                <% } %>
+  <section class="container">
+    <section class="containter">
+      <div class="user-info">
+        <p><strong>User Name</strong>: <%= user.userName %></p>
+        <p><strong>Email</strong>: <%= user.email %></p>
+        <a href="/logout" class="btn btn-primary med-btn" role="button"><i class="fa fa-sign-out-alt"></i> Logout</a>
+      </div>    
+    </section>
+    <h1>Editing Medicine Entry</h1>
+
+    <% if (errorMessages && errorMessages.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+          <% errorMessages.forEach(message => { %>
+            <% if (message.msg) { %>
+              <%= message.msg %>
+            <% } else { %>
+              <%= message %>
+            <% } %>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <section class="col-sm-10 col-md-7 col-lg-6 col-xl-5">
+        <div class="med-cab-wrapper">
+          <div class="med-cab">
+            <ul class="list-group list-group-flush">
+              <% medList.forEach(med => { %>
+                  <% if (med._id == idMed) { %>
+                  <li class="list-group-item">
+                      <form action="/edit/update/<%= med._id %>" method="POST">
+                          <label for="name">Medicine</label>
+                          <input type="text" class="form-control" name="name" value="<%= med.name %>">
+                          <!-- <br> -->
+                          <label for="notes">Notes</label>
+                          <input type="text" class="form-control" name="notes" value="<%= med.notes %>">
+                          <br>
+                          <button class="btn btn-secondary btn-sm" type="submit"><i class="fa fa-check"></i> Confirm</button>
+                          <a href="/profile" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i> Cancel</a>
+                      </form>
+                  </li>
+                  <% } else { %>
+                  <li class="list-group-item">
+                      <div>Medicine: <%= med.name %></div>
+                      <% if (med.notes) { %>
+                        <div>Notes: <%= med.notes %></div>
+                      <% } %>
+                      <a class="btn btn-secondary btn-sm" href="/edit/<%= med._id %>" role="button"><i class="fa fa-pen"></i> Edit</a>
+                      <a class="btn btn-danger btn-sm" href="/edit/remove/<%= med._id %>" role="button"><i class="fa fa-trash"></i> Remove</a>
+                  </li>
+                  <% } %>
               <% }) %>
-            </div>
-          <% } %>
-            <ul>
-                <% medList.forEach(med => { %>
-                    <% if (med._id == idMed) { %>
-                    <li>
-                        <form action="/edit/update/<%= med._id %>" method="POST">
-                            <label for="name">Medicine</label>
-                            <input type="text" name="name" value="<%= med.name %>">
-                            <br>
-                            <label for="notes">Notes</label>
-                            <input type="text" name="notes" value="<%= med.notes %>">
-                            <br>
-                            <button type="submit">Confirm</button>
-                            <a href="/">Cancel</a>
-                        </form>
-                    </li>
-                    <% } else { %>
-                    <li>
-                        <div><%= med.name %></div>
-                        <div><%= med.notes %></div>
-                        <a href="/edit/<%= med._id %>">Edit</a>
-                        <a href="/edit/remove/<%= med._id %>">Remove</a>
-                    </li>
-                    <% } %>
-                <% }) %>
-            </ul>
+          </ul>
+          </div>
+        </div>
+      </section>
+      
+        
+  </section>
+  
 </body>
 
 <%- include('partials/footer') -%>
