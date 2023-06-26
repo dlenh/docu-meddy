@@ -35,7 +35,44 @@
       }
     }
 
+/* .med-cab-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+} */
+
 .med-cab {
       background-color: teal;
       padding: 20px;
+      border-radius: 5px;
+      min-height: 100px;
+      margin-bottom: 20px;
     }
+
+.med-btn {
+    border: 2px solid black;
+    background-color: teal;
+}
+
+.med-btn:hover {
+    background-color: white;
+    color: teal;
+    border: 2px solid teal;
+}
+/* 
+.fa-pen {
+    color: black;
+} */
+
+.app-name {
+  color: teal;
+  text-decoration: none;
+}
+
+.app-name:hover {
+  color: black;
+}
+
+.user-info {
+  margin: 20px 0;
+}
