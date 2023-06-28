@@ -11,19 +11,20 @@
     </section>
     <h1>Editing Medicine Entry</h1>
 
-    <% if (errorMessages && errorMessages.length > 0) { %>
-        <div class="alert alert-danger" role="alert">
-          <% errorMessages.forEach(message => { %>
-            <% if (message.msg) { %>
-              <%= message.msg %>
-            <% } else { %>
-              <%= message %>
-            <% } %>
-          <% }) %>
-        </div>
-      <% } %>
+    
 
       <section class="col-sm-10 col-md-7 col-lg-6 col-xl-5">
+        <% if (errorMessages && errorMessages.length > 0) { %>
+          <div class="alert alert-danger" role="alert">
+            <% errorMessages.forEach(message => { %>
+              <% if (message.msg) { %>
+                <%= message.msg %>
+              <% } else { %>
+                <%= message %>
+              <% } %>
+            <% }) %>
+          </div>
+        <% } %>
         <div class="med-cab-wrapper">
           <div class="med-cab">
             <ul class="list-group list-group-flush">
@@ -36,7 +37,7 @@
                           <!-- <br> -->
                           <label for="notes">Notes</label>
                           <input type="text" class="form-control" name="notes" value="<%= med.notes %>">
-                          <br>
+                          <!-- <br> -->
                           <button class="btn btn-secondary btn-sm" type="submit"><i class="fa fa-check"></i> Confirm</button>
                           <a href="/profile" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i> Cancel</a>
                       </form>
