@@ -58,12 +58,13 @@
       </section>
       <section class="col-sm-10 col-md-7 col-lg-6 col-xl-5">
         <div class="med-cab-wrapper">
-          <div class="med-cab">
-            <% if (medList.length === 0) { %>
-              <h1>Medicine Cabinet</h1>
-            <% } else { %>
-              <h1>Medicine Cabinet: <%= medList.length %></h1> 
-            <% } %>
+          <% if (medList.length === 0) { %>
+            <h1>Medicine Cabinet</h1>
+          <% } else { %>
+            <h1>Medicine Cabinet: <%= medList.length %></h1> 
+          <% } %>
+          <div class="<%= medList.length === 0 ? "" : "med-cab" %>">
+            
             <ul class="list-group list-group-flush">
               <% medList.forEach(med => { %>
                   <li class="list-group-item">
