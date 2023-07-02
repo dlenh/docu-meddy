@@ -11,10 +11,11 @@ module.exports = {
             
             if (!med) {
             req.flash("error", "Medicine not found");
-            return res.redirect("/");
+            return res.redirect("/profile");
             }
 
             res.render("edit.ejs", { 
+                user: req.user,
                 medList: meds, 
                 idMed: id, 
                 med: med, 
@@ -22,7 +23,7 @@ module.exports = {
         } catch (err) {
             console.error(err);
             req.flash("error", "An error occurred while fetching medicine");
-            return res.redirect("/");
+            return res.redirect("/profile");
         }
     },
     deleteMed: async (req, res) => {
@@ -42,8 +43,9 @@ module.exports = {
             const existingMed = await MedList.findOne({ name });
             if (existingMed && existingMed._id.toString() !== id) {
                 req.flash("error", "This medicine is already on your list.");
-                const  medlist = await MedList.find();
+                const  medlist = await MedList.find({ user: req.user._id });
                 return res.render("edit", { 
+                    user: req.user,
                     medList: medlist, 
                     idMed: id, 
                     errorMessages: req.flash("error"),
@@ -63,6 +65,7 @@ module.exports = {
                     req.flash("error", "Invalid or misspelled medicine name. Please ensure correct spelling.");
                     const  medlist = await MedList.find();
                     return res.render("edit", { 
+                        user: req.user,
                         medList: medlist, 
                         idMed: id, 
                         errorMessages: req.flash("error"),
@@ -83,12 +86,13 @@ module.exports = {
             await MedList.findByIdAndUpdate(id, updateMed);
 
             req.flash("success", "Medicine updated successfully!");
-            return res.redirect("/");
+            return res.redirect("/profile");
         } catch (err) {
             console.log(err);
             // req.flash("error", "An error occurred while updating medicine");
             const medlist = await MedList.find();
             return res.render("edit", { 
+                user: req.user,
                 medList: medlist, 
                 idMed: id, 
                 errorMessages: req.flash("error"),
