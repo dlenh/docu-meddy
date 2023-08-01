@@ -3,7 +3,7 @@ A full-stack web application that allows users to create accounts and log the me
 
 **Link to project** Coming soon
 
-![Screenshot of website]
+![Screenshot of website](https://i.gyazo.com/19e108e7745f3160741fa9dd19c5f459.png)
 
 ## How It's Made:
 
@@ -17,4 +17,4 @@ API fetches can be made in Node.js by requiring node-fetch. The returned JSON da
 
 ## Optimizations:
 
-If the application were to be on a grander scale and required complex routing and heavy data-driven components, then React would be better than EJS for the view portion of MVC. Other optimizations include utilizing other strategies (Google, Twitter, Facebook, etc.) for login using Passport. Email verification can also be added to prevent users from creating accounts with fake email addresses; users would have to click on a verification link sent to the email address they've provided before accessing the application. 
+If the application were to be on a grander scale and required complex routing and heavy data-driven components, then React would be better than EJS for the view portion of MVC. Other optimizations include utilizing other strategies (Google, Twitter, Facebook, etc.) for login using Passport. Email verification can also be added to prevent users from creating accounts with fake email addresses; users would have to click on a verification link sent to the email address they've provided before accessing the application. I am currently working on extending this application - another API from the National Library of Medicine will be integrated to allow users to check for potential drug interactions between the medication on their list.
