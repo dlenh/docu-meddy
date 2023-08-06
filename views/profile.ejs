@@ -10,10 +10,16 @@
     </div>
     </section> -->
     <section class="containter">
-      <div class="user-info">
-        <p><strong>User Name</strong>: <%= user.userName %></p>
-        <p><strong>Email</strong>: <%= user.email %></p>
-        <a href="/logout" class="btn btn-primary med-btn" role="button"><i class="fa fa-sign-out-alt"></i> Logout</a>
+      <div class="row">
+        <div class="col-sm-8 col-md-5">
+          <p><strong>User Name</strong>: <%= user.userName %></p>
+        </div>
+        <div class="col-sm-4 col-md-5">
+          <p><strong>Email</strong>: <%= user.email %></p>  
+        </div>
+        <div class="col-sm-4 col-md-8 col-lg-2 col-xl-2 d-flex justify-content-end">
+          <a href="/logout" class="btn btn-primary med-btn" role="button"><i class="fa fa-sign-out-alt"></i> Logout</a>
+        </div>
       </div>    
     </section>
     <section class="row">
@@ -28,9 +34,9 @@
         <button type="submit" class="btn btn-primary med-btn"><i class="fa fa-plus"></i> Add Medicine</button>
       </form>
       <br>
-      <form action="/interaction" method="GET" class="my-form">
+      <!-- <form action="/interaction" method="GET" class="my-form">
         <button type="submit" class="btn btn-primary med-btn"><i class="fa fa-check"></i> Check Drug Interactions</button>
-      </form>
+      </form> -->
       <br>
       <% if (errorMessages && errorMessages.length > 0) { %>
           <div class="alert alert-danger" role="alert">
@@ -56,7 +62,7 @@
           </div>
         <% } %>
       </section>
-      <section class="col-sm-10 col-md-7 col-lg-6 col-xl-5">
+      <section class="col-sm-10 col-md-7 col-lg-6 col-xl-6">
         <div class="med-cab-wrapper">
           <% if (medList.length === 0) { %>
             <h1>Medicine Cabinet</h1>
