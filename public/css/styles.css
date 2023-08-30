@@ -1,5 +1,6 @@
 .my-form,
-.my-list {
+.my-list,
+.alert-success {
     width: 75%;
 }
 /*
