@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const medListSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     rxcui: {
         type: String,
