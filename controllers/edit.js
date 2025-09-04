@@ -7,7 +7,7 @@ module.exports = {
 
         try {
             const med = await MedList.findById(id);
-            const meds = await MedList.find({ user: req.user._id });
+            // const meds = await MedList.find({ user: req.user._id });
             
             if (!med) {
             req.flash("error", "Medicine not found");
@@ -16,9 +16,9 @@ module.exports = {
 
             res.render("edit.ejs", { 
                 user: req.user,
-                medList: meds, 
-                idMed: id, 
-                med: med, 
+                // medList: meds, 
+                // idMed: id, 
+                med, 
                 errorMessages: req.flash("error") });
         } catch (err) {
             console.error(err);
@@ -40,17 +40,27 @@ module.exports = {
         const { name, notes } = req.body;
         
         try {
-            const existingMed = await MedList.findOne({ name });
-            if (existingMed && existingMed._id.toString() !== id) {
+            const existingMed = await MedList.findOne( { name, user: req.user._id, _id: { $ne: id } } );
+            if (existingMed) {
+                // && existingMed._id.toString() !== id
+                
+                // req.flash("error", "This medicine is already on your list.");
+                // const  medlist = await MedList.find({ user: req.user._id });
+                // return res.render("edit", { 
+                //     user: req.user,
+                //     medList: medlist, 
+                //     idMed: id, 
+                //     errorMessages: req.flash("error"),
+                //     // name: name, 
+                //     // notes: notes  
+                // });
                 req.flash("error", "This medicine is already on your list.");
-                const  medlist = await MedList.find({ user: req.user._id });
-                return res.render("edit", { 
-                    user: req.user,
-                    medList: medlist, 
-                    idMed: id, 
-                    errorMessages: req.flash("error"),
-                    // name: name, 
-                    // notes: notes  
+            const medlist = await MedList.find({ user: req.user._id });
+            return res.render("edit", { 
+                user: req.user,
+                medList: medlist, 
+                idMed: id, 
+                errorMessages: req.flash("error"),
                 });
             }
 
